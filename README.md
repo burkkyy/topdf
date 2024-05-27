@@ -1,6 +1,4 @@
-# topdf
-Most file types to pdf converter
-
+# Any file to PDF converter
 ## Supported file types
 TXT, DOCX, JPG, PDF
 
