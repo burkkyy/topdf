@@ -1,4 +1,3 @@
-FROM node:
 FROM alpine:3.20.0
 
 WORKDIR /root/env
