@@ -2,12 +2,12 @@ import fs from "fs/promises";
 import puppeteer from "puppeteer";
 import mammoth from "mammoth";
 
-async function docx_to_html(filepath){
+async function docxToHtml(filepath){
     let res = await mammoth.convertToHtml(filepath);
     console.log(res);
 }
 
-async function html_to_pdf(file){
+async function htmlToPdf(file){
     let args = [
         "--no-sandbox",
         "--disable-setuid-sandbox"
@@ -26,11 +26,7 @@ async function html_to_pdf(file){
 
 export async function topdf(filepath){
     const file = await fs.readFile(filepath, "utf8");
-
-    docx_to_html("tests/pdfconverter-test.docx")
-
-    var ret = await html_to_pdf(file);
-
-    fs.writeFile("test.pdf", ret);
+    var ret = await htmlToPdf(file);
+    return ret;
 }
 
