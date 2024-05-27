@@ -28,3 +28,6 @@ RUN libreoffice --version
 
 WORKDIR /root/env
 
+# Configure working env
+COPY package*.json .
+
