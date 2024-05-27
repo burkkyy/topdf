@@ -12,7 +12,7 @@ RUN apk add --no-cache \
 # Font configuration (https://stackoverflow.com/questions/56937689/how-to-install-fonts-in-docker)
 RUN apk add --no-cache msttcorefonts-installer fontconfig
 RUN update-ms-fonts
-RUN apk add ttf-freefont font-terminus font-inconsolata font-dejavu font-noto font-noto-cjk font-awesome font-noto-extra -y
+RUN apk add ttf-freefont font-terminus font-inconsolata font-dejavu font-noto font-noto-cjk font-awesome font-noto-extra
 
 # Google fonts
 RUN wget https://github.com/google/fonts/archive/main.tar.gz -O gf.tar.gz --no-check-certificate
