@@ -1,7 +1,5 @@
 FROM alpine:3.20.0
 
-WORKDIR /root/env
-
 RUN apk update && apk upgrade
 RUN apk add --no-cache \
     nodejs \
@@ -10,6 +8,8 @@ RUN apk add --no-cache \
     libreoffice
 
 # Font configuration (https://stackoverflow.com/questions/56937689/how-to-install-fonts-in-docker)
+WORKDIR /root/fonts
+
 RUN apk add --no-cache msttcorefonts-installer fontconfig
 RUN update-ms-fonts
 RUN apk add ttf-freefont font-terminus font-inconsolata font-dejavu font-noto font-noto-cjk font-awesome font-noto-extra
@@ -25,4 +25,6 @@ RUN fc-cache -f && rm -rf /var/cache/*
 RUN node -v
 RUN npm -v
 RUN libreoffice --version
+
+WORKDIR /root/env
 
