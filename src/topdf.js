@@ -1,32 +1,13 @@
 import fs from "fs/promises";
-import puppeteer from "puppeteer";
-import mammoth from "mammoth";
+import { promisify } from "util";
+import libreoffice from "libreoffice-convert";
 
-async function docxToHtml(filepath){
-    let res = await mammoth.convertToHtml(filepath);
-    console.log(res);
-}
+libreoffice.convertAsync = promisify(libreoffice.convert);
 
-async function htmlToPdf(file){
-    let args = [
-        "--no-sandbox",
-        "--disable-setuid-sandbox"
-    ];
-
-    const browser = await puppeteer.launch({ args: args });
-    const page = await browser.newPage();
-    await page.setContent(file, { waitUntil: "networkidle0" });
-    // await page.goto(file.url, { waitUntil: [ "load", "networkidle0" ] });
-    
-    return page.pdf({ path: "test123.pdf" }).then(async (data) => {
-            await browser.close();
-            return Buffer.from(Object.values(data));
-    });
-}
-
-export async function topdf(filepath){
-    const file = await fs.readFile(filepath, "utf8");
-    var ret = await htmlToPdf(file);
-    return ret;
+export async function topdf(inputPath, outputPath){
+    const ext = "pdf";
+    let inputBuffer = await fs.readFile(inputPath);
+    let outputBuffer = await libreoffice.convertAsync(inputBuffer, ext, undefined);
+    await fs.writeFile(outputPath, outputBuffer);
 }
 
