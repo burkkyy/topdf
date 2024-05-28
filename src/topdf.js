@@ -1,12 +1,13 @@
 import fs from "fs/promises";
-import unoconv from "unoconv";
+import { promisify } from "util";
+import libreoffice from "libreoffice-convert";
+
+libreoffice.convertAsync = promisify(libreoffice.convert);
 
 export async function topdf(inputPath, outputPath){
-    //let pdfBuffer = await docxToPdf(inputPath);
-    //await fs.writeFile(outputPath, pdfBuffer);
-    unoconv.convert(inputPath, 'pdf', function (err, result) {
-	    // result is returned as a Buffer
-	    fs.writeFile(outputPath, result);
-    });
+    const ext = "pdf";
+    let inputBuffer = await fs.readFile(inputPath);
+    let outputBuffer = await libreoffice.convertAsync(inputBuffer, ext, undefined);
+    await fs.writeFile(outputPath, outputBuffer);
 }
 
