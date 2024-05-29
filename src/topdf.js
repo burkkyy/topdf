@@ -10,13 +10,13 @@ libreoffice.convertAsync = promisify(libreoffice.convert);
  * @param outputPath Filepath to dump the pdf after converted 
  * @return None
  */
-export async function topdf(inputPath, outputPath){
+export async function topdf(inputPath){
     const ext = "pdf";
 
     let inputBuffer = await fs.readFile(inputPath);
     let outputBuffer = await libreoffice.convertAsync(inputBuffer, ext, undefined);
     
-    await fs.writeFile(outputPath, outputBuffer);
+    return outputBuffer;
 }
 
 /**
@@ -28,6 +28,7 @@ export async function topdfStream(inputBuffer){
     const ext = "pdf";
     
     let outputBuffer = await libreoffice.convertAsync(inputBuffer, ext, undefined);
+    
     return outputBuffer;
 }
 

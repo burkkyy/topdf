@@ -1,7 +1,7 @@
 import express from "express";
 import fileUpload from "express-fileupload";
 
-import { topdfStream } from "../src/topdf.js";
+import { topdf, topdfStream } from "../src/topdf.js";
 
 const app = express();
 app.use(fileUpload({
@@ -24,9 +24,13 @@ app.post("/", async (req, res) => {
     if(req.files){
         console.log(req.files);
         console.log("Sending pdf buffer to client...");
-        let inputBuffer = req.files.files.data;
-        console.log(inputBuffer);
-        let pdfBuffer = await topdfStream(inputBuffer);
+        //let inputBuffer = req.files.files.data;
+        
+        let inputFilePath = req.files.files.tempFilePath;
+        console.log(inputFilePath);
+
+        let pdfBuffer = await topdf(inputFilePath);
+
         res.setHeader('Content-Type', 'application/pdf');
         res.send(pdfBuffer);
     } else {
