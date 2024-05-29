@@ -26,7 +26,9 @@ WORKDIR /root/env
 
 # Configure working env
 COPY package*.json .
-COPY api/ .
-COPY src/ .
+COPY api/ ./
+COPY src/ ./
 RUN npm i
+
+# ENTRYPOINT ["npm", "run", "dev"]
 
