@@ -5,6 +5,7 @@ import { topdf, topdfStream } from "../src/topdf.js";
 
 const app = express();
 app.use(fileUpload({
+    debug: true,
     useTempFiles: true,
     tempFileDir: '/tmp/'
 }));
