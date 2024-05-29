@@ -21,7 +21,7 @@ app.post("/", async (req, res) => {
         console.log("Error?");
     }*/
     if(req.files){
-        console.log(req.files.md5);
+        console.log(req.files);
     }
     res.status(200).send("hello");
 });
