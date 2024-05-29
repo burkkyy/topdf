@@ -11,7 +11,7 @@ app.use(fileUpload({
 const PORT = 5000;
 
 app.post("/", async (req, res) => {
-    console.log("POST recv");
+    console.log("POST recv start");
     /*
     if (req.files) {
         let files = Array.isArray(req.files.files) ? req.files.files : [req.files.files];
@@ -22,8 +22,10 @@ app.post("/", async (req, res) => {
     }*/
     if(req.files){
         console.log(req.files);
+        console.log(`${req.files.md5}`);
     }
     res.status(200).send("hello");
+    console.log("recv end");
 });
 
 app.get("/", (req, res) => {
