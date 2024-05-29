@@ -11,3 +11,10 @@ export async function topdf(inputPath, outputPath){
     await fs.writeFile(outputPath, outputBuffer);
 }
 
+export async function topdfStream(inputFile){
+    const ext = "pdf";
+    const { fileType } = inputFile.file;
+    return "TESTING";
+    return libreoffice.convertAsync(inputFile.file.data, ext, undefined);
+}
+
