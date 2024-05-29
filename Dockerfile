@@ -31,5 +31,5 @@ COPY src/ ./src
 RUN npm i
 
 EXPOSE 5000
-# ENTRYPOINT ["npm", "run", "dev"]
+ENTRYPOINT ["npm", "run", "dev"]
 
