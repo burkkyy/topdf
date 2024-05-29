@@ -22,13 +22,14 @@ RUN find $PWD/fonts-main/ -name "*.ttf" -exec install -m644 {} /usr/share/fonts/
 RUN rm -f gf.tar.gz
 RUN fc-cache -f && rm -rf /var/cache/*
 
+# Configure working env
 WORKDIR /root/env
 
-# Configure working env
 COPY package*.json .
-COPY api ./
-COPY src ./
+COPY api/ ./api
+COPY src/ ./src
 RUN npm i
 
+EXPOSE 5000
 # ENTRYPOINT ["npm", "run", "dev"]
 
