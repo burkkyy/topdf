@@ -22,10 +22,6 @@ RUN find $PWD/fonts-main/ -name "*.ttf" -exec install -m644 {} /usr/share/fonts/
 RUN rm -f gf.tar.gz
 RUN fc-cache -f && rm -rf /var/cache/*
 
-RUN node -v
-RUN npm -v
-RUN libreoffice --version
-
 WORKDIR /root/env
 
 # Configure working env
