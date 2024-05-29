@@ -3,7 +3,10 @@ import fileUpload from "express-fileupload";
 import { topdf } from "../src/topdf.js";
 
 const app = express();
-app.use(fileUpload());
+app.use(fileUpload({
+    useTempFiles: true,
+    tempFileDir: '/tmp/'
+}));
 
 const PORT = 5000;
 
@@ -17,7 +20,9 @@ app.post("/", async (req, res) => {
     } else {
         console.log("Error?");
     }*/
-    
+    if(req.files){
+        console.log(req.files.md5);
+    }
     res.status(200).send("hello");
 });
 
