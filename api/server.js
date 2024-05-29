@@ -25,7 +25,7 @@ app.post("/", async (req, res) => {
         console.log(req.files);
         console.log("Sending pdf buffer to client...");
         let inputBuffer = req.files.files.data;
-        let pdfBuffer = topdfStream(inputBuffer);
+        let pdfBuffer = await topdfStream(inputBuffer);
         res.setHeader('Content-Type', 'application/pdf');
         res.send(pdfBuffer);
     } else {
