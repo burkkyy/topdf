@@ -22,7 +22,7 @@ app.post("/", async (req, res) => {
     }*/
     if(req.files){
         console.log(req.files);
-        console.log(`${req.files.md5}`);
+        console.log(`${req.files.files.md5}`);
     }
     res.status(200).send("hello");
     console.log("recv end");
