@@ -1,6 +1,7 @@
 import express from "express";
 import fileUpload from "express-fileupload";
-import { topdf } from "../src/topdf.js";
+
+import { topdfStream } from "../src/topdf.js";
 
 const app = express();
 app.use(fileUpload({
@@ -22,15 +23,18 @@ app.post("/", async (req, res) => {
     }*/
     if(req.files){
         console.log(req.files);
-        console.log(`${req.files.files.md5}`);
+        console.log("Sending pdf buffer to client...");
+        let inputBuffer = req.files.files.data;
+        let pdfBuffer = topdfStream(inputBuffer);
+        res.setHeader('Content-Type', 'application/pdf');
+        res.send(pdfBuffer);
+    } else {
+        res.status(200).send("hello");
     }
-    res.status(200).send("hello");
     console.log("recv end");
 });
 
-app.get("/", (req, res) => {
-    res.sendStatus(200);
-});
+app.get("/", (req, res) => { res.sendStatus(200); });
 
 app.listen(PORT, () => { console.log(`Server listening on port ${PORT}`); });
     
