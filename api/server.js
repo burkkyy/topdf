@@ -13,7 +13,6 @@ app.use(fileUpload({
 const PORT = 5000;
 
 app.post("/", async (req, res) => {
-    console.log("POST recv start");
     /*
     if (req.files) {
         let files = Array.isArray(req.files.files) ? req.files.files : [req.files.files];
@@ -23,12 +22,11 @@ app.post("/", async (req, res) => {
         console.log("Error?");
     }*/
     if(req.files){
-        console.log(req.files);
+        console.log(`req.files=${req.files}`);
         console.log("Sending pdf buffer to client...");
         //let inputBuffer = req.files.files.data;
         
         let inputFilePath = req.files.files.tempFilePath;
-        console.log(inputFilePath);
 
         let pdfBuffer = await topdf(inputFilePath);
 
