@@ -7,15 +7,15 @@ app.use(fileUpload());
 
 const PORT = 5000;
 
-app.post("/", (req, res) => {
+app.post("/", async (req, res) => {
     console.log("POST recv");
     
     if (req.files) {
         let files = Array.isArray(req.files.files) ? req.files.files : [req.files.files];
-        let newFile = await topdf(files[0]);
+        let newFile = await topdfStream(files[0]);
         res.sendFile(newFile);
     } else {
-
+        console.log("Error?");
     }
     
     res.status(200).send("hello");
