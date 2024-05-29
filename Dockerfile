@@ -26,4 +26,7 @@ WORKDIR /root/env
 
 # Configure working env
 COPY package*.json .
+COPY api/ .
+COPY src/ .
+RUN npm i
 
