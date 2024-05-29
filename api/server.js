@@ -22,7 +22,7 @@ app.post("/", async (req, res) => {
         console.log("Error?");
     }*/
     if(req.files){
-        console.log(`req.files=${req.files}`);
+        console.log(req.files);
         console.log("Sending pdf buffer to client...");
         //let inputBuffer = req.files.files.data;
         
