@@ -9,6 +9,7 @@
   },
   "scripts": {
     "start": "cd api/ && node server.js",
+    "deploy": "cd api/ && node server.js"
     "dev": "cd api/ && nodemon server.js",
     "test": "cd testing/ && nodemon test.js"
   },

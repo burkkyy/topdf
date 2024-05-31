@@ -21,24 +21,29 @@ app.post("/", async (req, res) => {
     } else {
         console.log("Error?");
     }*/
+    console.log("[/] recv");
     if(req.files){
         console.log(req.files);
-        console.log("Sending pdf buffer to client...");
-        //let inputBuffer = req.files.files.data;
+        console.log("[/] Sending pdf buffer to client...");
         
         let inputFilePath = req.files.files.tempFilePath;
-
         let pdfBuffer = await topdf(inputFilePath);
 
         res.setHeader('Content-Type', 'application/pdf');
-        res.send(pdfBuffer);
+        res.status(200).send(pdfBuffer);
     } else {
-        res.status(200).send("hello");
+        res.status(400).send("No input files given.");
+        console.log("[/] Bad reqest");
     }
-    console.log("recv end");
+    console.log("[/] recv end");
 });
 
-app.get("/", (req, res) => { res.sendStatus(200); });
+app.get("/", (req, res) => { res.sendStatus(400); });
+
+app.get("/test", (req, res) => {
+    res.status(200).send("hello");
+    console.log("[/test] hello");
+});
 
 app.listen(PORT, () => { console.log(`Server listening on port ${PORT}`); });
-    
+
